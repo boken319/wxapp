@@ -1,0 +1,52 @@
+<view class="container">
+  <view class="user-info">
+    <image 
+      class="avatar" 
+      src="{{touxiang}}"
+      mode="widthFix"
+    ></image>
+    <text class="nickname">{{name}}</text>
+  </view>
+
+  <view class="user-btn">
+  <!-- 选择头像按钮 -->
+  <button 
+    class="getUser-btn"
+    open-type="chooseAvatar"
+    bind:chooseavatar="onChooseAvatar"
+    type="primary"
+  >
+    选择头像
+  </button>
+  
+  <!-- 获取昵称按钮 -->
+  <button 
+    class="getUser-btn"
+    bindtap="openNicknameModal"
+    type="primary"
+  >
+    获取昵称
+  </button>
+</view>
+
+  <!-- 昵称输入弹窗 -->
+  <view class="modal-mask" wx:if="{{showNicknameModal}}" bindtap="closeNicknameModal"></view>
+  <view class="modal-dialog" wx:if="{{showNicknameModal}}">
+    <view class="modal-title">设置昵称</view>
+    <view class="modal-content">
+      <input 
+        type="nickname"
+        placeholder="请输入或选择昵称"
+        value="{{tempNickname}}"
+        bind:change="onNicknameChange"
+        focus="{{focusInput}}"
+      />
+    </view>
+
+
+    <view class="modal-footer">
+      <button class="modal-btn cancel" bindtap="closeNicknameModal">取消</button>
+      <button class="modal-btn confirm" bindtap="confirmNickname">确定</button>
+    </view>
+  </view>
+</view>

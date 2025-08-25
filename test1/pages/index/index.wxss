@@ -1,0 +1,134 @@
+/**index.wxss**/
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 20rpx;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 80rpx;
+}
+
+.avatar {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 50%;
+  margin-bottom: 40rpx;
+  box-shadow: 0 4rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+.nickname {
+  font-size: 36rpx;
+  color: #333;
+  font-weight: 500;
+  text-align: center;
+}
+
+.user-btn {
+  display: flex; /* 横向排列按钮 */
+  flex-direction: column; 
+  gap: 20rpx; /* 按钮之间的间距 */
+  justify-content: center; /* 容器内按钮居中对齐 */
+  margin-top: 40rpx; /* 与上方内容保持距离 */
+  width: 100%; /* 适应父容器宽度 */
+  padding: 0 20rpx; /* 左右留边距，避免按钮贴边 */
+  box-sizing: border-box;
+}
+
+.getUser-btn::after {
+  border: none;
+}
+
+/* 按钮点击效果 */
+.getUser-btn:active {
+  opacity: 0.9;
+  transform: translateY(2rpx);
+  box-shadow: 0 4rpx 8rpx rgba(102, 51, 153, 0.3);
+}
+
+/* 弹窗样式 */
+.modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.modal-dialog {
+  width: 540rpx;
+  background-color: #fff;
+  border-radius: 16rpx;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.15);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1001;
+  box-sizing: border-box;
+}
+
+.modal-title {
+  padding: 30rpx;
+  text-align: center;
+  font-size: 36rpx;
+  font-weight: bold;
+  border-bottom: 1rpx solid #eee;
+}
+
+.modal-content {
+  padding: 30rpx;
+  box-sizing: border-box;
+}
+
+.modal-content input {
+  width: 100%;
+  height: 80rpx;
+  padding: 0 20rpx;
+  border: 1rpx solid #ddd;
+  border-radius: 8rpx;
+  font-size: 32rpx;
+  box-sizing: border-box;
+}
+
+/* 弹窗按钮区域 */
+.modal-footer {
+  display: flex;
+  padding: 15rpx;
+  border-top: 1rpx solid #eee;
+  justify-content: center;
+  gap: 20rpx; /* 按钮之间的间距 */
+}
+
+
+/* 确认按钮 - 使用微信绿色 */
+.modal-btn.confirm {
+  background-color: #07c160; 
+  color: white;
+  box-shadow: 0 4rpx 8rpx rgba(7, 193, 96, 0.2); /* 绿色阴影 */
+  padding: 12rpx 30rpx; /* 适当增加内边距 */
+  border-radius: 8rpx; /* 圆角效果 */
+}
+
+/* 取消按钮 */
+.modal-btn.cancel {
+  background-color: #f5f5f5;
+  color: #333;
+  padding: 12rpx 20rpx;
+  border-radius: 8rpx;
+  border: 1px solid #eee; /* 增加边框区分 */
+  text-align: center;
+}
+.modal-btn:active {
+  opacity: 0.9;
+  transform: translateY(2rpx);
+}
