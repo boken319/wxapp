@@ -11,6 +11,11 @@
 微信开发者工具（调试与预览）
 微信小程序原生接口：chooseAvatar（头像选择）、input type="nickname"（昵称获取）
 
+效果预览<img width="360" height="783" alt="屏幕截图 2025-08-25 220450" src="https://github.com/user-attachments/assets/5929ff22-4e7c-400c-8cf4-b347423d31df" />
+<img width="638" height="932" alt="屏幕截图 2025-08-25 220405" src="https://github.com/user-attachments/assets/e3bd2387-cc58-4ecc-b28d-6cfac9dde52f" />
+<img width="379" height="786" alt="屏幕截图 2025-08-25 220532" src="https://github.com/user-attachments/assets/fc2805e1-90c7-48e9-a5d5-6b961f24bbf5" />
+
+
 项目结构
 plaintext
 wechat-user-info-demo/
