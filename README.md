@@ -99,41 +99,14 @@ confirmNickname() {
     });
   }
 }
-3. 页面结构核心代码（index.wxml）
-xml
-<!-- 头像展示 -->
-<image class="avatar" src="{{touxiang}}" mode="widthFix"></image>
-<!-- 昵称展示 -->
-<text class="nickname">{{name}}</text>
 
-<!-- 选择头像按钮 -->
-<button class="getUser-btn" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
-  选择头像
-</button>
-
-<!-- 昵称输入弹窗 -->
-<view class="modal-dialog" wx:if="{{showNicknameModal}}">
-  <view class="modal-title">设置昵称</view>
-  <view class="modal-content">
-    <!-- 昵称输入框：type="nickname"关联微信昵称 -->
-    <input 
-      type="nickname"
-      placeholder="请选择或输入昵称"
-      value="{{tempNickname}}"
-      bind:change="onNicknameChange"
-      focus="{{focusInput}}"
-    />
-  </view>
-</view>
 常见问题
 Q：默认头像不显示怎么办？
 A：检查images文件夹是否存在、默认头像文件名是否为default-avatar.jpg、index.js中初始路径是否正确（需以/开头，如/images/default-avatar.jpg）。
 Q：点击「获取昵称」不弹出微信昵称选择弹窗？
 A：确保input标签添加了type="nickname"，且openNicknameModal方法中设置了focusInput: true；部分模拟器可能不支持，建议用真机测试。
-Q：输入框超出弹窗范围如何解决？
-A：在wxss中为modal-dialog和input添加box-sizing: border-box，确保padding不影响元素宽度。
 开发者信息
 开发者：王书一（中国海洋大学）
 项目用途：微信小程序开发课程实验
-开发时间：2024 年 X 月 X 日
-仓库地址：https://github.com/ 你的 GitHub 用户名 / 你的仓库名（替换为实际仓库地址）
+开发时间：2025 年 8 月 25 日
+
