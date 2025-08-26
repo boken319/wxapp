@@ -1,0 +1,12 @@
+{
+  "pages": [
+    "pages/index/index"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#3883FA",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "天气查询"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
