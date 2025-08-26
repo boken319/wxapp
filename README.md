@@ -13,9 +13,8 @@
 微信开发者工具（调试与预览）
 微信小程序原生接口：chooseAvatar（头像选择）、input type="nickname"（昵称获取）
 
-效果预览<img width="36" height="78" alt="屏幕截图 2025-08-25 220450" src="https://github.com/user-attachments/assets/5929ff22-4e7c-400c-8cf4-b347423d31df" />
-<img width="63" height="93" alt="屏幕截图 2025-08-25 220405" src="https://github.com/user-attachments/assets/e3bd2387-cc58-4ecc-b28d-6cfac9dde52f" />
-<img width="37" height="78" alt="屏幕截图 2025-08-25 220532" src="https://github.com/user-attachments/assets/fc2805e1-90c7-48e9-a5d5-6b961f24bbf5" />
+效果预览<img width="100" height="200" alt="屏幕截图 2025-08-25 220450" src="https://github.com/user-attachments/assets/5929ff22-4e7c-400c-8cf4-b347423d31df" />
+<img width="100" height="200" alt="屏幕截图 2025-08-25 220532" src="https://github.com/user-attachments/assets/fc2805e1-90c7-48e9-a5d5-6b961f24bbf5" />
 
 
 项目结构
@@ -133,6 +132,9 @@ A：确保input标签添加了type="nickname"，且openNicknameModal方法中设
 第三方 API：和风天气 API（城市搜索接口 + 实时天气接口）
 布局方案：Flex 布局
 版本控制：Git/GitHub
+项目预览：
+<img width="100" height="200" alt="image" src="https://github.com/user-attachments/assets/cf5bb0a8-58bd-4556-8c3d-f39e8a2cb54b" />
+
 项目结构
 plaintext
 weather-miniprogram/
