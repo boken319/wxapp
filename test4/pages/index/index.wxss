@@ -1,0 +1,49 @@
+/* 视频组件样式*/
+video {
+  width : 100% ;
+}
+/* 区域2：弹幕样式控制 */
+/*2-1弹幕区域样式*/
+.danmuArea{
+  display: flex; 
+  flex-direction: row;
+}
+/*2-2文本输入框样式*/
+input{
+  border : 1rpx solid #987938;
+  flex-grow : 1; /*扩张多余空间宽度*/
+  height : 100rpx;
+}
+/*2-3按钮样式*/
+button{
+  color : white;
+  background-color: #987938;
+}
+/*区域3：视频列表区域样式*/
+/*3-1视频列表区域样式*/
+.videoList{
+  width :100%;
+  min-height: 400rpx;
+}
+/*3-2单行列表区域样式*/
+.videoBar{
+  width:95%;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1rpx solid #987938;
+  margin : 10rpx;
+}
+/*3-3播放图标样式*/
+image{
+  width : 70rpx;
+  height :70rpx;
+  margin: 20rpx;
+}
+/*3-4文本标题样式*/
+text{
+  font-size: 45rpx;
+  color : #987938;
+  margin : 20rpx;
+  flex-grow: 1;
+}
+
