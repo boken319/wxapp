@@ -291,3 +291,80 @@ JSON 数据集	trash.json（垃圾 - 分类映射）、type.json（类别定义�
 确认百度智能云账号已完成实名认证，且已领取图像识别免费资源；检查 search.js 中 apiKey 和 secretKey 是否复制正确（避免多余空格）。
 图像识别跨端不稳定（手机行 / 电脑不行）：
 检查网络环境（需稳定联网），微信开发者工具调试时选择 “真机调试”，确保手机与电脑处于同一 WiFi；若仍不稳定，可优先聚焦文本搜索功能（实验核心目标）。
+项目预览
+
+<img width="225" height="492" alt="屏幕截图 2025-09-01 174802" src="https://github.com/user-attachments/assets/45cfe87a-5d21-446d-a3f5-9ee8c70f37fe" />
+<img width="227" height="507" alt="屏幕截图 2025-09-01 174825" src="https://github.com/user-attachments/assets/3c422de3-49bc-4d54-aad6-65dfdc2da3aa" />
+<img width="232" height="499" alt="屏幕截图 2025-09-01 174902" src="https://github.com/user-attachments/assets/5ccc9ccb-cc9d-4d79-b86e-3994d65f3bca" />
+
+移动软件开发实验四：
+口述校史视频播放小程序
+一、项目介绍
+1. 项目背景
+本项目基于周文洁老师《微信小程序开发实战》第六章实验，旨在通过小程序媒体 API 实现视频播放功能，核心素材为某高校档案馆《口述校史》栏目视频，记录老教工对大学的回忆，适合小程序初学者学习媒体组件与交互逻辑。
+2. 核心功能
+视频列表展示与切换：支持 4 位老教工的口述校史视频列表，点击即可切换播放
+视频自动播放控制：点击列表项自动停止当前视频、加载新视频并播放
+随机颜色弹幕：支持输入文本发送弹幕，弹幕颜色随机生成（十六进制颜色值）
+自定义导航栏：金棕色导航栏搭配 “口述校史” 标题，优化视觉体验
+二、环境准备
+开发工具：微信开发者工具（稳定版），下载地址：微信开发者工具官网
+AppID：可使用微信小程序测试号（无需注册企业账号，工具内直接申请）
+素材准备：
+播放图标 play.png（已提供下载链接，或自行替换为同尺寸图标）
+视频资源：默认使用高校档案馆视频地址，若地址失效可替换为公开可访问的 MP4 格式视频链接
+三、文件结构说明
+plaintext
+videoDemo/                # 项目根目录
+├─ images/                # 图标资源文件夹
+│  └─ play.png            # 播放图标（列表项显示用）
+├─ pages/                 # 页面文件夹（仅保留首页index）
+│  └─ index/              # 首页相关文件
+│     ├─ index.wxml       # 页面结构（视频播放器、弹幕区、列表区）
+│     ├─ index.wxss       # 页面样式（布局、颜色、尺寸适配）
+│     ├─ index.js         # 页面逻辑（视频控制、弹幕发送、列表交互）
+│     └─ index.json       # 页面配置（默认无需修改）
+├─ app.js                 # 全局应用逻辑（初始化App实例）
+├─ app.json               # 全局配置（导航栏、页面路径）
+├─ app.wxss               # 全局样式（默认清空，未使用）
+└─ project.config.json    # 项目配置（工具自动生成，无需手动修改）
+四、部署与运行步骤
+代码下载：将本项目代码克隆或下载到本地，解压至空白文件夹（如videoDemo）
+导入项目：
+打开微信开发者工具，点击 “+ 新小程序项目”
+项目名称填 “口述校史视频播放”，目录选择本地解压的videoDemo文件夹
+AppID 选择 “测试号”（或输入个人 / 企业 AppID），取消 “使用云服务”，点击 “创建”
+素材替换（可选）：
+若play.png图标缺失，下载图标压缩包（链接见下方 “素材链接”），解压后放入images文件夹
+若默认视频地址失效，在index.js的list数组中替换videoUrl为公开 MP4 链接
+运行项目：点击开发者工具顶部 “编译” 按钮，模拟器将显示小程序界面，可实时预览功能
+五、核心功能实现说明
+1. 视频列表与切换
+通过wx:for循环渲染list数组中的视频标题与图标，wx:key绑定视频id确保渲染性能
+点击列表项触发playVideo事件：先停止当前视频，再更新视频地址并调用play()方法播放新视频
+2. 弹幕功能
+视频组件添加enable-danmu属性开启弹幕，danmu-btn显示默认弹幕按钮（可选）
+输入框通过bindinput绑定getDanmu事件，实时获取输入内容并存储到danmuTxt
+点击 “发送弹幕” 触发sendDanmu事件，调用sendDanmuAPI 发送文本，颜色由getRandomColor生成（随机十六进制颜色）
+3. 导航栏自定义
+在app.json的window配置中，设置navigationBarBackgroundColor为金棕色（#987938），navigationBarTitleText为 “口述校史”
+六、素材链接
+播放图标play.png下载：https://gaopursuit.oss-cn-beijing.aliyuncs.com/2022/images_play.zip
+默认视频地址（来自高校档案馆）：
+杨国宜先生：http://arch.ahnu.edu.cn/__local/6/CB/D1/C2DF3FC847F4CE2ABB67034C595_025F0082_ABD7AE2.mp4?e=.mp4
+其他 3 位先生视频地址见index.js的list数组
+七、常见问题（FAQ）
+Q：播放图标不显示？
+A：检查images文件夹路径是否正确（需与index.wxml中image的src一致，如/images/play.png，区分大小写）。
+Q：弹幕发送后不显示？
+A：确认video组件已添加enable-danmu属性；检查danmuTxt是否在data中初始化（需设为空字符串）。
+Q：调用随机颜色函数报错 “getRandomColor is not defined”？
+A：确保getRandomColor函数在Page()内部定义，调用时需加this.（如this.getRandomColor()）。
+Q：视频无法加载？
+A：检查videoUrl是否为有效链接；若使用自定义链接，确保链接支持跨域访问（小程序需配置合法域名，测试号可跳过域名校验）。
+八、扩展建议
+新增 “视频进度记忆” 功能：记录用户上次播放位置，下次打开自动跳转
+添加 “弹幕开关”：允许用户手动开启 / 关闭弹幕显示
+优化列表样式：增加视频时长、播放量等信息
+支持弹幕速度调节：通过danmu-speed属性自定义弹幕滚动速度
+如有问题或优化建议，欢迎在评论区交流！<img width="523" height="1108" alt="屏幕截图 2025-09-02 145928" src="https://github.com/user-attachments/assets/4afa8571-1cf6-4ba7-b49c-690a31bf2c32" />
