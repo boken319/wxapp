@@ -364,7 +364,87 @@ Q：视频无法加载？
 A：检查videoUrl是否为有效链接；若使用自定义链接，确保链接支持跨域访问（小程序需配置合法域名，测试号可跳过域名校验）。
 八、扩展建议
 新增 “视频进度记忆” 功能：记录用户上次播放位置，下次打开自动跳转
-添加 “弹幕开关”：允许用户手动开启 / 关闭弹幕显示
 优化列表样式：增加视频时长、播放量等信息
 支持弹幕速度调节：通过danmu-speed属性自定义弹幕滚动速度
 如有问题或优化建议，欢迎在评论区交流！<img width="523" height="1108" alt="屏幕截图 2025-09-02 145928" src="https://github.com/user-attachments/assets/4afa8571-1cf6-4ba7-b49c-690a31bf2c32" />
+
+移动软件开发实验五：
+第一个 HarmonyOS 应用
+本项目是一个基于 HarmonyOS 的基础入门示例工程，采用 ArkTS 语言和 Stage 模型 开发，核心功能是实现两个页面之间的跳转与返回，包含基础 UI 组件（Text、Button）、线性布局（Row/Column）和页面路由（Router）的使用，适合 HarmonyOS 应用开发新手学习参考。
+通过本项目，可掌握：
+DevEco Studio 开发环境的基础使用
+ArkTS 声明式 UI 的基本语法
+Stage 模型工程目录结构
+页面路由跳转逻辑实现
+基础组件样式配置
+环境准备
+1. 开发工具
+DevEco Studio：最新版（推荐 5.0+，下载地址：华为开发者联盟）
+HarmonyOS SDK：API Version 5.1.1 (19)（需在 DevEco Studio 中自动 / 手动安装）
+2. 运行环境
+模拟器：DevEco Studio 内置 HarmonyOS 模拟器（需在 SDK Manager 中安装对应版本模拟器插件）
+实机设备：HarmonyOS 4.0+ 系统的手机 / 平板（开启开发者模式）
+预览器：DevEco Studio 内置 Previewer（无需额外配置，可快速预览 UI）
+3. 依赖说明
+无第三方依赖库，仅使用 HarmonyOS 系统内置 API（@kit.BasicServicesKit 等）。
+快速开始
+1. 克隆仓库
+bash
+# 克隆本项目到本地
+git clone https://github.com/your-username/your-repo-name.git
+# 进入项目目录
+cd your-repo-name
+2. 打开工程
+启动 DevEco Studio，点击 File > Open，选择克隆后的项目根目录（注意：路径中不可包含中文字符或空格）。
+工程加载后，DevEco Studio 会自动检测 SDK 配置，若提示 "SDK not found"，点击 Setup SDK，在弹出的窗口中选择 API Version 5.1.1 (19) 并完成安装。
+等待工程同步完成（底部状态栏显示 "Sync finished"），同步过程中需保持网络通畅（用于下载依赖资源）。
+3. 预览页面
+在左侧 Project 窗口中，展开 entry > src > main > ets > pages，双击打开 Index.ets。
+点击编辑窗口右上角的 Previewer 按钮（图标为眼睛），启动预览器。
+预览器加载完成后，可直接看到第一个页面（显示 "Hello World" 和 "Next" 按钮），点击按钮可预览页面跳转效果。
+4. 实机 / 模拟器运行
+连接实机设备（开启开发者模式 + USB 调试），或启动内置模拟器（Tools > Device Manager，选择对应设备并启动）。
+点击 DevEco Studio 顶部工具栏的 Run 'entry' 按钮（绿色三角图标），或使用快捷键 Shift + F10。
+等待编译和安装完成，设备上会自动启动应用，测试页面跳转功能。
+项目结构（Stage 模型）
+plaintext
+FirstHarmonyApp/          # 项目根目录
+├── AppScope/             # 应用全局配置
+│   └── app.json5         # 应用名称、版本、图标等全局配置
+├── entry/                # 主模块（生成 HAP 包）
+│   ├── src/
+│   │   └── main/
+│   │       ├── ets/      # ArkTS 源码目录
+│   │       │   ├── entryability/  # 应用入口（生命周期管理）
+│   │       │   └── pages/         # 页面目录
+│   │       │       ├── Index.ets  # 第一个页面（首页）
+│   │       │       └── Second.ets # 第二个页面（跳转页）
+│   │       └── resources/         # 资源文件（图片、字符串等）
+│   │           └── base/
+│   │               └── profile/
+│   │                   └── main_pages.json # 页面路由配置
+│   ├── build-profile.json5        # 模块编译配置
+│   └── module.json5               # 模块基础配置（HAP 信息、设备适配）
+├── build-profile.json5    # 工程级编译配置（签名、产品配置）
+└── README.md              # 项目说明文档（本文档）
+核心功能说明
+1. 页面功能
+页面文件	功能描述
+Index.ets	首页 - 显示 "Hello World" 文本 + "Next" 按钮，点击按钮跳转到 Second 页面
+Second.ets	跳转页 - 显示 "Hi there" 文本 + "Back" 按钮，点击按钮返回 Index 页面
+2. 关键技术点
+声明式 UI：使用 @Entry、@Component 装饰器定义页面和组件，build() 方法描述 UI 结构。
+线性布局：通过 Row()（水平布局）和 Column()（垂直布局）嵌套，实现组件居中显示。
+状态管理：使用 @State 装饰器定义页面状态变量（如 message），变量变化时 UI 自动更新。
+页面路由：通过 UIContext.getRouter() 获取路由实例，调用 pushUrl()（跳转）和 back()（返回）实现页面导航。
+日志输出：通过 console.info()/console.error() 打印操作日志，便于调试（在 DevEco Studio 底部 Console 窗口查看）。
+
+常见问题（FAQ）
+预览器显示空白？
+解决：
+检查代码是否有语法错误（左侧目录树中文件是否有红色波浪线），修复后重新编译；
+单击编辑窗口右上角侧边工具栏中的 "Previewer" 按钮
+等待预览器初始化完成，首次加载可能需要几秒钟
+预览器中会显示当前页面的效果，可通过预览器下方的控件调整预览设备和尺寸
+<img width="789" height="813" alt="image" src="https://github.com/user-attachments/assets/21686295-34b7-4382-b498-1226741cec94" />
+
