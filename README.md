@@ -448,3 +448,144 @@ Second.ets	跳转页 - 显示 "Hi there" 文本 + "Back" 按钮，点击按钮�
 预览器中会显示当前页面的效果，可通过预览器下方的控件调整预览设备和尺寸
 <img width="789" height="813" alt="image" src="https://github.com/user-attachments/assets/21686295-34b7-4382-b498-1226741cec94" />
 
+移动软件开发实验六：
+推箱子游戏（微信小程序）
+项目介绍
+本项目是基于微信小程序开发的简易推箱子游戏，源自周文洁老师《微信小程序开发实战》第十三章案例。通过综合运用小程序canvas组件、绘图 API、页面路由与数据交互等技术，实现了包含 “关卡选择” 与 “游戏操作” 的完整交互流程，支持 4 个不同难度关卡，具备主角移动、箱子推动、游戏成功判断与重新开始等核心功能。
+技术栈
+开发框架：微信小程序原生框架（WXML + WXSS + JavaScript）
+核心组件：canvas（游戏画面绘制）、view（布局容器）、button（交互按钮）
+核心 API：wx.createCanvasContext（画布上下文创建）、wx.navigateTo（页面跳转）、wx.showModal（弹窗提示）
+项目结构
+plaintext
+boxGame/
+├── images/                # 图片素材目录
+│   ├── level01.png        # 第1关预览图
+│   ├── level02.png        # 第2关预览图
+│   ├── level03.png        # 第3关预览图
+│   ├── level04.png        # 第4关预览图
+│   └── icon/              # 游戏元素图标
+│       ├── bird.png       # 游戏主角（小鸟）
+│       ├── box.png        # 箱子
+│       ├── ice.png        # 道路
+│       ├── pig.png        # 终点
+│       └── stone.png      # 墙壁
+├── pages/                 # 页面目录
+│   ├── index/             # 首页（关卡选择）
+│   │   ├── index.js       # 首页逻辑
+│   │   ├── index.json     # 首页配置
+│   │   ├── index.wxml     # 首页布局
+│   │   └── index.wxss     # 首页样式
+│   └── game/              # 游戏页
+│       ├── game.js        # 游戏逻辑（核心）
+│       ├── game.json      # 游戏页配置
+│       ├── game.wxml      # 游戏页布局
+│       └── game.wxss      # 游戏页样式
+├── utils/                 # 工具目录
+│   └── data.js            # 公共地图数据（4个关卡）
+├── app.js                 # 小程序入口逻辑
+├── app.json               # 小程序全局配置
+├── app.wxss               # 小程序全局样式
+└── project.config.json    # 项目配置（开发者工具）
+功能说明
+1. 首页（关卡选择）
+界面展示：2×2 网格布局显示 4 个关卡，每个关卡包含 “预览图 + 关卡文本”（如 “第 1 关”）。
+交互功能：点击任意关卡，通过wx.navigateTo跳转至游戏页，并携带关卡下标参数（如level=0对应第 1 关）。
+2. 游戏页（核心交互）
+（1）游戏元素
+地图：8×8 网格布局，包含墙壁（灰色）、道路（浅蓝色）、终点（粉色）三种静态元素。
+动态元素：
+主角（黄色小鸟）：可通过方向键控制移动。
+箱子（棕色方块）：仅可被主角推动，不可穿过墙壁或其他箱子。
+（2）核心操作
+操作	功能描述
+方向键（上 / 下 / 左 / 右）	控制主角沿对应方向移动；若主角前方有箱子且箱子前方无障碍，可推动箱子移动。
+重新开始按钮	重置当前关卡，将主角与箱子回归初始位置，重新开始游戏。
+（3）游戏规则
+目标：将所有箱子推动至 “终点” 位置（箱子与粉色终点图标重叠）。
+成功判断：当所有箱子均位于终点时，自动弹出 “游戏成功” 提示框。
+部署与运行
+1. 环境准备
+安装微信开发者工具（稳定版）。
+注册微信小程序账号（个人账号即可），获取 AppID（或使用测试号）。
+2. 项目导入
+克隆本仓库到本地：
+bash
+git clone https://github.com/你的GitHub用户名/boxGame.git
+
+打开微信开发者工具，点击 “导入项目”：
+项目名称：自定义（如 “推箱子游戏”）。
+目录：选择本地克隆的boxGame文件夹。
+AppID：输入你的小程序 AppID（或选择 “测试号”）。
+点击 “创建”，等待项目加载完成。
+3. 运行测试
+点击开发者工具顶部的 “编译” 按钮，默认加载首页（关卡选择）。
+点击任意关卡进入游戏页，测试方向键操作、箱子推动与重新开始功能。
+核心代码说明
+1. 地图数据定义（utils/data.js）
+通过二维数组定义 4 个关卡的地图，数字对应游戏元素：
+0：墙壁外围（不可见）、1：墙壁、2：道路、3：终点、4：箱子、5：主角。
+javascript
+运行
+// 示例：第1关地图数据
+var map1 = [
+  [0, 1, 1, 1, 1, 1, 0, 0],
+  [0, 1, 2, 2, 1, 1, 1, 0],
+  [0, 1, 5, 4, 2, 2, 1, 0],
+  [1, 1, 1, 2, 1, 2, 1, 1],
+  [1, 3, 1, 2, 1, 2, 2, 1],
+  [1, 3, 4, 2, 2, 1, 2, 1],
+  [1, 3, 2, 2, 2, 4, 2, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1]
+];
+// 暴露地图数据供游戏页引用
+module.exports = { maps: [map1, map2, map3, map4] };
+2. 画布绘制（pages/game/game.js）
+通过drawCanvas函数绘制地图、箱子与主角，确保元素层级正确（主角在最上层）：
+javascript
+运行
+drawCanvas: function () {
+  // 清空画布
+  this.ctx.clearRect(0, 0, 320, 320);
+  // 绘制地图（墙壁/道路/终点）
+  for (var i = 0; i < 8; i++) {
+    for (var j = 0; j < 8; j++) {
+      let imgName = map[i][j] === 1 ? 'stone' : (map[i][j] === 3 ? 'pig' : 'ice');
+      this.ctx.drawImage(`/images/icon/${imgName}.png`, j * 40, i * 40, 40, 40);
+      // 叠加绘制箱子
+      if (box[i][j] === 4) {
+        this.ctx.drawImage('/images/icon/box.png', j * 40, i * 40, 40, 40);
+      }
+    }
+  }
+  // 叠加绘制主角（最后绘制，避免被覆盖）
+  this.ctx.drawImage('/images/icon/bird.png', col * 40, row * 40, 40, 40);
+  // 渲染画布
+  this.ctx.draw();
+}
+3. 方向键逻辑（pages/game/game.js）
+以 “上方向键” 为例，实现主角移动与箱子推动逻辑：
+javascript
+运行
+up: function () {
+  if (row > 0) { // 主角不在最顶端
+    // 前方无墙无箱子，直接移动
+    if (map[row - 1][col] !== 1 && box[row - 1][col] !== 4) {
+      row--;
+    } 
+    // 前方有箱子，判断是否可推动
+    else if (box[row - 1][col] === 4 && row - 1 > 0) {
+      if (map[row - 2][col] !== 1 && box[row - 2][col] !== 4) {
+        box[row - 2][col] = 4; // 箱子上移
+        box[row - 1][col] = 0; // 清空原箱子位置
+        row--; // 主角上移
+      }
+    }
+    this.drawCanvas(); // 重绘画布
+    this.checkWin();   // 判断游戏是否成功
+  }
+}<img width="258" height="518" alt="image" src="https://github.com/user-attachments/assets/0bd3935b-d6aa-4a3b-a492-304d6b93865d" /><img width="244" height="471" alt="image" src="https://github.com/user-attachments/assets/586f0639-0fc0-48b0-b051-f0f08c417363" /><img width="242" height="476" alt="image" src="https://github.com/user-attachments/assets/2b0c8c0e-3925-4187-8067-6f9796e93ffb" />
+
+
+
+
